@@ -1,0 +1,42 @@
+---
+- name: BCV-Hoy Node.js
+  hosts: all
+  
+  vars:
+    app_user: gregor  # Cambia esto por el usuario de tu aplicación
+    app_dir: /var/www/bcvhoy-app  # Cambia esto por el directorio de tu aplicación
+    repo_url: "https://github.com/gregormach/BCV-Hoy.git"  # Cambia esto por la URL de tu repositorio
+    node_version: "20"  # Cambia esto por la versión de Node.js que necesitas
+
+  tasks:
+    
+    - name: Clonar repositorio
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ app_dir }}"
+        version: master  # O la rama que necesites
+      
+    - name: Instalar Node.js y npm
+      shell: |
+        curl -sL https://deb.nodesource.com/setup_{{ node_version }}.x | sudo -E bash -
+        sudo apt-get update
+        sudo apt-get install -y nodejs
+      
+    - name: Instalar dependencias de la aplicación
+      npm:
+        path: "{{ app_dir }}"
+        state: present
+      
+    - name: Construir la aplicación (si es necesario)
+      shell: |
+         npm run build
+      args:
+         chdir: "{{ app_dir }}"
+      when: " 'build' in (lookup('pipe', 'npm run --silent list --depth 0 -- -g'))"
+      
+    - name: Iniciar la aplicación con PM2
+      shell: |
+        pm2 start npm --name "BCV-Hoy" -- run start
+      args:
+        chdir: "{{ app_dir }}"
+      when: " 'start' in (lookup('pipe', 'npm run --silent list --depth 0 -- -g'))"
