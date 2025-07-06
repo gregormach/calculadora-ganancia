@@ -91,7 +91,7 @@ const ExchangeRate = ({
         <div className="">
           <p>
             <strong
-              className="font-medium text-md"
+              className="font-medium text-sm"
               onChange={exchangeRUsd(exchangeRateUsd)}
             >
               $ = <span className="text-green-400">{exchangeRateUsd}</span> Bs.S{" "}
@@ -99,7 +99,7 @@ const ExchangeRate = ({
           </p>
           <p>
             <strong
-              className="font-medium text-md"
+              className="font-medium text-sm"
               onChange={exchangeREur(exchangeRateEur)}
             >
               € = <span className="text-green-400">{exchangeRateEur}</span> Bs.S{" "}
@@ -107,7 +107,7 @@ const ExchangeRate = ({
           </p>
           <p>
             <strong
-              className="font-medium text-md"
+              className="font-medium text-sm"
               onChange={exchangeRCny(exchangeRateCny)}
             >
               ¥ = <span className="text-green-400">{exchangeRateCny}</span> Bs.S{" "}

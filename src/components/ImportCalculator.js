@@ -117,14 +117,11 @@ const ImportCalculator = () => {
   };
 
   const limpiar = () => {
-    setBss("");
-    setUsd("");
-    setEur("");
-    setCny("");
+    limpiarCanpos();
   };
 
   return (
-    <div className="max-w-md mx-auto pt-4 pl-5 pr-5">
+    <div className="max-w-md mx-auto pt-3 pl-5 pr-5">
       <ExchangeRate
         exchangeRUsd={setexchangeRUsd}
         exchangeREur={setexchangeREur}
@@ -133,7 +130,7 @@ const ImportCalculator = () => {
       />
       <div className="space-y-3">
         <div className="text-center">
-          <div class="relative mt-5 flex items-center">
+          <div class="relative mt-4 flex items-center">
             <input
               type="number"
               value={porce}
@@ -291,7 +288,7 @@ const ImportCalculator = () => {
 
         <button
           onClick={limpiar}
-          className="w-full py-1 px-4 rounded-lg text-white font-medium mt-5 transition-colors bg-blue-600 hover:bg-blue-400"
+          className="w-full py-1 px-4 rounded-lg text-white font-medium mt-3 transition-colors bg-blue-600 hover:bg-blue-400"
         >
           Limpiar
         </button>
